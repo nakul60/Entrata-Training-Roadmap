@@ -68,7 +68,7 @@ PHP → host=db → PostgreSQL
 Clone the repo:
 
 ```bash
-git clone https://github.com/nakul60/entrata-training-roadmap.git
+git clone https://github.com/nakul60/Entrata-Training-Roadmap.git
 cd docker-basics
 ```
 
