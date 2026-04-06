@@ -9,6 +9,8 @@ A simple full-stack CRUD application built using:
 
 This project demonstrates how to run a complete multi-container application **without installing PHP or PostgreSQL locally**.
 
+Link: https://hub.docker.com/r/nakul75/my-docker-app-web
+
 ---
 
 ## 🚀 Features
