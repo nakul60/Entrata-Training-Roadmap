@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('new_bg_dark.png') no-repeat center center/cover;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    padding: 50px;
+    border-radius: 10px;
+    color: white;
+    gap: 100px;
+}
+
+.left {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.left h1 {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.left p{
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.left h2{
+    margin-top: 30px;
+    color: white;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.right {
+    flex: 1;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.right h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border: 2px solid #ff6600;
+}
+
+button {
+    width: 100%;
+    background: #ff6600;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #cc5500;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

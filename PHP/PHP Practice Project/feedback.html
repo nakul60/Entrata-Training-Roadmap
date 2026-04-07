@@ -1,0 +1,94 @@
+<!-- feedback.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Feedback</title>
+    <link rel="stylesheet" href="feedback.css">
+    <style>
+        button {
+            margin: 20px 0;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px;
+            border: #ff4d00;
+            background-color: #ff4d00;
+            color: white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Smart City Tourism Guide</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><button class="nav-btn">Explore Cities</button></a>
+                <a href="tempo.html"><button class="nav-btn">Travel Packages</button></a>
+                <a href="visitor.html"><button class="nav-btn">Visitor Feedback</button></a>
+                <a href="feedback.html"><button class="nav-btn active">Add Feedback</button></a>
+                <button class="nav-btn logout-btn" onclick="logoutUser()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="feedback-container">
+        <h2>Add Your Feedback</h2>
+        <form id="feedbackForm" action="submit_feedback.php" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" name="name" id="name" required>
+
+            <label for="city">Select City</label>
+            <select name="city" id="city">
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Indore">Indore</option>
+                <option value="Goa">Goa</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Udaipur">Udaipur</option>
+                <option value="Varanasi">Varanasi</option>
+                <option value="Agra">Agra</option>
+                <option value="Shimla">Shimla</option>
+            </select>
+
+            <label for="rating">Rating</label>
+            <input type="number" name="rating" id="rating" min="1" max="5" step="0.1" required>
+
+            <label for="comment">Your Feedback</label>
+            <textarea name="comment" id="comment" rows="3" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+                    function logoutUser() {
+            fetch("logout.php")
+                .then(() => {
+                    window.location.href = "signin.html";  // Redirect after logout
+                });
+        }
+        </script>
+    </div>
+</body>
+
+</html>

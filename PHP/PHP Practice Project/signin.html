@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signin.css">
+    <script>
+        function loginUser(event) {
+            event.preventDefault();
+
+            let formData = new FormData(document.getElementById("signinForm"));
+
+            fetch("signin.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "index.html";  // Redirect on success
+                } else {
+                    alert(data.message);  // Show error message
+                }
+            })
+            .catch(error => console.log(error));
+        }
+    </script>
+</head>
+<body>
+    <!-- <h2>Sign In</h2>
+    <form id="signinForm" onsubmit="loginUser(event)">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Sign In</button>
+    </form>
+    <a href="signup.html">Don't have an account? Sign up</a> -->
+
+
+    <div class="container">
+        <div class="left">
+            <h1>Welcome to Smart City Tourism Guide</h1>
+            <p>Explore the city like never before with our intelligent tourism guide. Discover top attractions, hidden
+                gems, and real-time travel insights, all in one place.</p>
+
+            <h2>Mumbai&nbsp;&nbsp;|&nbsp;&nbsp;Delhi&nbsp;&nbsp;|&nbsp;&nbsp;Kolkata&nbsp;&nbsp;|&nbsp;&nbsp;Chennai</h2>
+
+        </div>
+        <div class="right">
+            <h2>Sign in</h2>
+            <form id="signinForm" onsubmit="loginUser(event)" class="form-group">
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit">Sign In</button>
+            </form>
+            <a href="signup.html">Don't have an account? Sign up</a>
+        </div>
+    </div>
+
+</body>
+</html>

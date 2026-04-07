@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Tour Package</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f9fafb;
+            gap: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #f97316;
+        }
+
+        .logo span {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: #4b5563;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        .nav-btn.active {
+            background-color: #f97316;
+            color: white;
+        }
+        
+        .container {
+            /* max-width: 650px; */
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        h2 {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            color: #f39c12;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f39c12;
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon i {
+            position: absolute;
+            left: 12px;
+            top: 14px;
+            color: #aaa;
+        }
+        
+        .input-icon input {
+            padding-left: 35px;
+        }
+        
+        .spot {
+            border: 1px solid #e9e9e9;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .spot:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .spot label {
+            cursor: pointer;
+            display: block;
+            margin: 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        
+        .spot input[type="checkbox"] {
+            width: auto;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        
+        .spot-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 13px;
+            color: #777;
+        }
+        
+        .total-price {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            text-align: right;
+            color: #333;
+        }
+        
+        #my_button{
+            background-color: #f39c12;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        #my_button:hover {
+            background-color: #e67e22;
+        }
+        
+        .date-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .date-inputs input {
+            text-align: center;
+        }
+        
+        .gender-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .gender-option {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .gender-option:hover {
+            border-color: #f39c12;
+        }
+        
+        .payment-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .payment-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-option.active {
+            border-color: #f39c12;
+            background-color: #fff8e8;
+        }
+        
+        .payment-option:hover {
+            border-color: #f39c12;
+        }
+        
+        .terms {
+            margin: 25px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .terms input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .spot-name {
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .badge-rating {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .expiry-date {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .expiry-date select {
+            flex: 1;
+        }
+    </style>
+    <script>
+        const citySpots = {
+    "Mumbai": [
+        { name: "Gateway of India", price: 0, rating: "4.8", timing: "Open 24/7" },
+        { name: "Elephanta Caves", price: 50, rating: "4.6", timing: "9 AM - 5 PM" },
+        { name: "Film City", price: 100, rating: "4.5", timing: "10 AM - 5 PM" },
+        { name: "Marine Drive", price: 0, rating: "4.8", timing: "Open 24/7" },
+        { name: "Chhatrapati Shivaji Terminus", price: 0, rating: "4.7", timing: "Open 24/7" },
+        { name: "Siddhivinayak Temple", price: 0, rating: "4.9", timing: "5:30 AM - 9:50 PM" },
+        { name: "Haji Ali Dargah", price: 0, rating: "4.7", timing: "5:30 AM - 10:00 PM" },
+        { name: "Juhu Beach", price: 0, rating: "4.3", timing: "Open 24/7" },
+        { name: "Bandra-Worli Sea Link", price: 0, rating: "4.8", timing: "Open 24/7" },
+        { name: "Sanjay Gandhi National Park", price: 85, rating: "4.5", timing: "7:30 AM - 5:30 PM" }
+    ],
+    "Delhi": [
+        { name: "Red Fort", price: 35, rating: "4.8", timing: "9 AM - 5 PM" },
+        { name: "Qutub Minar", price: 40, rating: "4.8", timing: "10 AM - 5 PM" },
+        { name: "Akshardham Temple", price: 0, rating: "4.9", timing: "9 AM - 6 PM" },
+        { name: "India Gate", price: 0, rating: "4.6", timing: "Open 24/7" },
+        { name: "Humayun's Tomb", price: 35, rating: "4.8", timing: "6 AM - 6 PM" },
+        { name: "Lotus Temple", price: 0, rating: "4.6", timing: "9 AM - 5:30 PM" },
+        { name: "Jama Masjid", price: 0, rating: "4.5", timing: "7 AM - 12 PM, 1:30 PM - 6:30 PM" },
+        { name: "Lodhi Gardens", price: 0, rating: "4.7", timing: "6 AM - 8 PM" },
+        { name: "Agrasen Ki Baoli", price: 0, rating: "4.4", timing: "7 AM - 6 PM" }
+    ],
+    "Kolkata": [
+        { name: "Victoria Memorial", price: 20, rating: "4.7", timing: "10 AM - 5 PM" },
+        { name: "Howrah Bridge", price: 0, rating: "4.6", timing: "Open 24/7" },
+        { name: "Dakshineswar Kali Temple", price: 0, rating: "4.8", timing: "6 AM - 12:30 PM, 3 PM - 8:30 PM" },
+        { name: "Science City", price: 50, rating: "4.5", timing: "9 AM - 8 PM" },
+        { name: "Belur Math", price: 0, rating: "4.9", timing: "6 AM - 11:30 AM, 4 PM - 7 PM" },
+        { name: "Indian Museum", price: 20, rating: "4.4", timing: "10 AM - 5 PM" },
+        { name: "Park Street", price: 0, rating: "4.7", timing: "Open 24/7" },
+        { name: "Eco Tourism Park", price: 30, rating: "4.6", timing: "12 PM - 8:30 PM" },
+        { name: "Marble Palace", price: 0, rating: "4.3", timing: "10 AM - 4 PM" }
+    ],
+
+    "Chennai": [
+    { name: "Marina Beach", price: 0, rating: "4.6", timing: "Open 24/7" },
+    { name: "Kapaleeshwarar Temple", price: 0, rating: "4.8", timing: "5:30 AM - 12:00 PM, 4:00 PM - 9:00 PM" },
+    { name: "Fort St. George", price: 15, rating: "4.3", timing: "9:00 AM - 5:00 PM" },
+    { name: "Government Museum", price: 15, rating: "4.5", timing: "9:30 AM - 5:00 PM" },
+    { name: "Mahabalipuram", price: 40, rating: "4.7", timing: "6:00 AM - 6:00 PM" },
+    { name: "Elliot's Beach", price: 0, rating: "4.4", timing: "Open 24/7" },
+    { name: "Santhome Cathedral", price: 0, rating: "4.6", timing: "6:00 AM - 8:00 PM" },
+    { name: "Valluvar Kottam", price: 10, rating: "4.2", timing: "8:00 AM - 6:00 PM" },
+    { name: "DakshinaChitra", price: 100, rating: "4.7", timing: "10:00 AM - 6:00 PM" }
+    ],
+
+    "Bangalore": [
+    { name: "Lalbagh Botanical Garden", price: 20, rating: "4.6", timing: "6:00 AM - 7:00 PM" },
+    { name: "Bangalore Palace", price: 230, rating: "4.3", timing: "10:00 AM - 5:30 PM" },
+    { name: "Cubbon Park", price: 0, rating: "4.7", timing: "6:00 AM - 6:00 PM" },
+    { name: "ISKCON Temple Bangalore", price: 0, rating: "4.8", timing: "4:15 AM - 8:30 PM" },
+    { name: "Wonderla Amusement Park", price: 910, rating: "4.6", timing: "11:00 AM - 6:00 PM" },
+    { name: "Tipu Sultan's Summer Palace", price: 15, rating: "4.2", timing: "8:30 AM - 5:30 PM" },
+    { name: "Bannerghatta Biological Park", price: 80, rating: "4.4", timing: "10:00 AM - 5:00 PM" },
+    { name: "Vidhana Soudha", price: 0, rating: "4.5", timing: "Exterior views only" },
+    { name: "HAL Aerospace Museum", price: 50, rating: "4.3", timing: "9:00 AM - 5:00 PM" }
+    ],
+
+    "Jaipur": [
+  { name: "Amber Fort", price: 500, rating: "4.7", timing: "8:00 AM - 5:30 PM" },
+  { name: "City Palace", price: 700, rating: "4.6", timing: "9:30 AM - 5:00 PM" },
+  { name: "Hawa Mahal", price: 200, rating: "4.5", timing: "9:00 AM - 4:30 PM" },
+  { name: "Jantar Mantar", price: 200, rating: "4.4", timing: "9:00 AM - 4:30 PM" },
+  { name: "Jal Mahal", price: 0, rating: "4.3", timing: "Viewable from outside only" },
+  { name: "Nahargarh Fort", price: 200, rating: "4.5", timing: "10:00 AM - 5:30 PM" },
+  { name: "Albert Hall Museum", price: 300, rating: "4.4", timing: "9:00 AM - 5:00 PM, 7:00 PM - 10:00 PM" },
+  { name: "Jaigarh Fort", price: 200, rating: "4.3", timing: "9:00 AM - 4:30 PM" },
+  { name: "Birla Mandir", price: 0, rating: "4.6", timing: "6:00 AM - 12:00 PM, 3:00 PM - 9:00 PM" }
+    ],
+
+    "Hyderabad": [
+  { name: "Charminar", price: 200, rating: "4.5", timing: "9:00 AM - 5:30 PM" },
+  { name: "Golconda Fort", price: 200, rating: "4.6", timing: "8:00 AM - 5:30 PM" },
+  { name: "Ramoji Film City", price: 1450, rating: "4.4", timing: "9:00 AM - 5:30 PM" },
+  { name: "Hussain Sagar Lake", price: 0, rating: "4.3", timing: "24 hours (boat rides 8:00 AM - 9:00 PM)" },
+  { name: "Salar Jung Museum", price: 500, rating: "4.7", timing: "10:00 AM - 5:00 PM (Closed on Fridays)" },
+  { name: "Birla Mandir", price: 0, rating: "4.6", timing: "7:00 AM - 12:00 PM, 3:00 PM - 9:00 PM" },
+  { name: "Lumbini Park", price: 20, rating: "4.2", timing: "9:00 AM - 9:00 PM" },
+  { name: "Qutb Shahi Tombs", price: 200, rating: "4.3", timing: "9:30 AM - 4:30 PM" },
+  { name: "Chowmahalla Palace", price: 200, rating: "4.5", timing: "10:00 AM - 5:00 PM (Closed on Fridays)" }
+    ],
+
+    "Pune": [
+  { name: "Aga Khan Palace", price: 200, rating: "4.4", timing: "9:00 AM - 5:30 PM" },
+  { name: "Shaniwar Wada", price: 125, rating: "4.3", timing: "8:00 AM - 6:30 PM" },
+  { name: "Sinhagad Fort", price: 50, rating: "4.6", timing: "24 hours (best visited during daylight)" },
+  { name: "Dagdusheth Halwai Ganpati Temple", price: 0, rating: "4.8", timing: "6:00 AM - 10:30 PM" },
+  { name: "Rajiv Gandhi Zoological Park", price: 40, rating: "4.2", timing: "9:30 AM - 5:30 PM (Closed on Wednesdays)" },
+  { name: "Pataleshwar Cave Temple", price: 0, rating: "4.3", timing: "8:30 AM - 5:30 PM" },
+  { name: "Osho Ashram", price: 990, rating: "4.4", timing: "6:00 AM - 9:30 PM" },
+  { name: "Lal Mahal", price: 0, rating: "4.1", timing: "9:00 AM - 6:00 PM" },
+  { name: "ISKCON NVCC Temple", price: 0, rating: "4.7", timing: "4:30 AM - 9:00 PM" }
+],
+
+"Ahmedabad": [
+  { name: "Sabarmati Ashram", price: 0, rating: "4.6", timing: "8:30 AM - 6:30 PM" },
+  { name: "Kankaria Lake", price: 10, rating: "4.3", timing: "9:00 AM - 10:00 PM" },
+  { name: "Adalaj Stepwell", price: 300, rating: "4.5", timing: "8:00 AM - 6:00 PM" },
+  { name: "Akshardham Temple", price: 0, rating: "4.8", timing: "9:30 AM - 8:00 PM (Closed on Mondays)" },
+  { name: "Jama Masjid", price: 0, rating: "4.4", timing: "6:00 AM - 8:00 PM" },
+  { name: "Calico Museum of Textiles", price: 0, rating: "4.7", timing: "10:30 AM - 12:30 PM (Reservation required)" },
+  { name: "ISKCON Temple", price: 0, rating: "4.6", timing: "4:30 AM - 9:00 PM" },
+  { name: "Auto World Vintage Car Museum", price: 200, rating: "4.3", timing: "10:00 AM - 5:30 PM (Closed on Mondays)" },
+  { name: "Law Garden Night Market", price: 0, rating: "4.2", timing: "4:00 PM - 11:00 PM" }
+    ],
+
+    "Lucknow": [
+  { name: "Bara Imambara", price: 500, rating: "4.7", timing: "6:00 AM - 5:00 PM" },
+  { name: "Chota Imambara", price: 300, rating: "4.6", timing: "6:00 AM - 5:00 PM" },
+  { name: "Rumi Darwaza", price: 0, rating: "4.5", timing: "24 hours" },
+  { name: "British Residency", price: 100, rating: "4.3", timing: "10:00 AM - 5:00 PM (Closed on Mondays)" },
+  { name: "Hazratganj Market", price: 0, rating: "4.4", timing: "11:00 AM - 9:00 PM" },
+  { name: "Ambedkar Memorial Park", price: 10, rating: "4.3", timing: "9:00 AM - 6:00 PM (Closed on Mondays)" },
+  { name: "Lucknow Zoo", price: 50, rating: "4.1", timing: "8:30 AM - 5:00 PM (Closed on Mondays)" },
+  { name: "Janeshwar Mishra Park", price: 10, rating: "4.5", timing: "5:00 AM - 9:00 PM" },
+  { name: "Chattar Manzil", price: 10, rating: "4.2", timing: "10:00 AM - 5:00 PM" }
+    ],
+
+
+
+
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('credit-card').classList.add('active');
+        });
+
+        function selectPayment(method) {
+            document.querySelectorAll('.payment-option').forEach(elem => {
+                elem.classList.remove('active');
+            });
+            document.getElementById(method).classList.add('active');
+            
+            if (method === 'credit-card') {
+                document.getElementById('card-details').style.display = 'block';
+            } else {
+                document.getElementById('card-details').style.display = 'none';
+            }
+        }
+
+        function showSpots() {
+            let city = document.getElementById("city").value;
+            let spotsContainer = document.getElementById("spots");
+            spotsContainer.innerHTML = "";
+
+            if (city in citySpots) {
+                citySpots[city].forEach((spot, index) => {
+                    let spotDiv = document.createElement("div");
+                    spotDiv.className = "spot";
+                    spotDiv.innerHTML = `
+                        <label>
+                            <input type="checkbox" name="spot" value="${spot.name}" data-price="${spot.price}" onchange="calculateTotal()">
+                            <div class="spot-name">${spot.name} 
+                                <span class="badge badge-rating">★ ${spot.rating}</span>
+                            </div>
+                            <div class="spot-details">
+                                <span>Price: ₹${spot.price}</span>
+                                <span>Timing: ${spot.timing}</span>
+                            </div>
+                        </label>
+                    `;
+                    spotsContainer.appendChild(spotDiv);
+                });
+            }
+        }
+
+        function calculateTotal() {
+            let checkboxes = document.querySelectorAll('input[name="spot"]:checked');
+            let total = 0;
+            let selectedSpots = [];
+
+            checkboxes.forEach((checkbox) => {
+                total += parseFloat(checkbox.getAttribute("data-price"));
+                selectedSpots.push(checkbox.value);
+            });
+
+            document.getElementById("totalPrice").innerText = "Total Price: ₹" + total.toFixed(2);
+            document.getElementById("selectedSpots").value = selectedSpots.join(", ");
+            document.getElementById("calculatedTotal").value = total.toFixed(2);
+        }
+
+        function logoutUser() {
+            fetch("logout.php")
+                .then(() => {
+                    window.location.href = "signin.html";  // Redirect after logout
+                });
+        }
+
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Smart City Tourism Guide</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">
+                    <button onclick="showSection('explore')" class="nav-btn">Explore Cities</button>
+                </a>
+                <a href="tempo.html">
+                    <button class="nav-btn active">Travel Packages</button>
+                </a>
+                <a href="visitor.html">
+                    <button onclick="showSection('feedback')" class="nav-btn">Visitor Feedback</button>
+                </a>
+                <a href="feedback.html">
+                    <button class="nav-btn">Add Feedback</button>
+                </a>
+                <button class="nav-btn logout-btn" onclick="logoutUser()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <h2>City Tour Package</h2>
+        
+        <form action="save_booking.php" method="post">
+            <div class="form-section">
+                <div class="section-header">Account</div>
+                
+                <div class="form-group input-icon">
+                    <i>👤</i>
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
+                </div>
+                
+                <div class="form-group input-icon">
+                    <i>✉️</i>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">Tour Selection</div>
+                
+                <div class="form-group">
+                    <label for="city">Select a City:</label>
+                    <select id="city" name="city" onchange="showSpots()" required>
+                        <option value="">--Select--</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Jaipur">Jaipur</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Lucknow">Lucknow</option>
+                        <option value="Indore">Indore</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Guwahati">Guwahati</option>
+                        <option value="Mysore">Mysore</option>
+                        <option value="Udaipur">Udaipur</option>
+                        <option value="Varanasi">Varanasi</option>
+                        <option value="Agra">Agra</option>
+                        <option value="Shimla">Shimla</option>
+                    </select>
+                </div>
+
+                <div id="spots"></div>
+
+                <div class="total-price" id="totalPrice">Total Price: ₹0.00</div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">Payment Details</div>
+                
+                <div class="payment-options">
+                    <div id="credit-card" class="payment-option" onclick="selectPayment('credit-card')">
+                        💳 Credit Card
+                    </div>
+                    <div id="paypal" class="payment-option" onclick="selectPayment('paypal')">
+                        💸 PayPal
+                    </div>
+                </div>
+                
+                <div id="card-details">
+                    <div class="form-group input-icon">
+                        <i>💳</i>
+                        <input type="text" placeholder="Card Number" name="card_number">
+                    </div>
+                    
+                    <div class="form-group input-icon">
+                        <i>🔒</i>
+                        <input type="text" placeholder="Card CVC" name="card_cvc">
+                    </div>
+                    
+                    <div class="expiry-date">
+                        <select name="expiry_month">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        
+                        <select name="expiry_year">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="terms">
+                <label>
+                    <input type="checkbox" required>
+                    I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy
+                </label>
+            </div>
+            
+            <input type="hidden" id="selectedSpots" name="selectedSpots" required>
+            <input type="hidden" id="calculatedTotal" name="totalPrice" required>
+            
+            <button id = "my_button" type="submit">Book Now</button>
+        </form>
+    </div>
+</body>
+</html>

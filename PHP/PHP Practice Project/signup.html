@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+    <script>
+        function registerUser(event) {
+            event.preventDefault();
+
+            let formData = new FormData(document.getElementById("signupForm"));
+
+            fetch("signup.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Registration successful! Please sign in.");
+                        window.location.href = "signin.html"; // Redirect to sign-in
+                    } else {
+                        alert(data.message);  // Show error
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <h2>Sign Up</h2>
+    <form id="signupForm" onsubmit="registerUser(event)">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <a href="signin.html">Already have an account? Sign in</a> -->
+
+
+    <div class="container">
+        <div class="left">
+            <h1>Join Smart City Tourism Guide</h1>
+            <p>Discover cities like never before! Sign up to explore top attractions, hidden gems, and real-time travel
+                insights.</p>
+
+        </div>
+        <div class="right">
+            <h2>Sign Up</h2>
+            <form id="signupForm" onsubmit="registerUser(event)" class="form-group">
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+                <button type="submit">Sign Up</button>
+            </form>
+            <a href="signin.html">Already have an account? Sign in</a>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

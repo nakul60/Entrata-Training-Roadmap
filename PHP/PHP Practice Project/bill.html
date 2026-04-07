@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Package Receipt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding: 40px 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .logo {
+            margin-bottom: 15px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #f39c12;
+        }
+        
+        h2 {
+            color: #333;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 22px;
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 20px 0;
+        }
+        
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .receipt-date {
+            color: #777;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .details {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .detail-value {
+            text-align: right;
+            color: #333;
+        }
+        
+        .spots-list {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        
+        .spots-list li {
+            margin-bottom: 3px;
+        }
+        
+        .total-price {
+            font-size: 22px;
+            font-weight: 600;
+            color: #f39c12;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff8e8;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .thank-you {
+            font-size: 18px;
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #777;
+        }
+        
+        button {
+            margin-top: 25px;
+            padding: 12px 24px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .print-icon {
+            margin-right: 8px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            button {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        function fetchBill() {
+            // Sample data for preview (would normally come from fetch_bill.php)
+            // const sampleData = {
+            //     name: "Jane Smith",
+            //     email: "jane.smith@example.com",
+            //     city: "Mumbai",
+            //     selected_spots: "Gateway of India, Elephanta Caves, Film City",
+            //     total_price: "150.00",
+            //     booking_date: "April 3, 2025"
+            // };
+            
+            // In a real scenario, uncomment this code:
+            
+            fetch("fetch_bill.php")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        populateData(data);
+                    }
+                })
+                .catch(error => console.error("Error fetching bill:", error));
+            
+            
+            // For demo purposes, use sample data
+            // populateData(sampleData);
+        }
+        
+        function populateData(data) {
+            document.getElementById("customerName").innerText = data.name;
+            document.getElementById("customerEmail").innerText = data.email;
+            document.getElementById("tourCity").innerText = data.city;
+            
+            // Create spots list
+            const spotsContainer = document.getElementById("spotsVisited");
+            const spots = data.selected_spots.split(", ");
+            
+            if (spots.length > 1) {
+                const ul = document.createElement("ul");
+                ul.className = "spots-list";
+                spots.forEach(spot => {
+                    const li = document.createElement("li");
+                    li.textContent = spot;
+                    ul.appendChild(li);
+                });
+                spotsContainer.appendChild(ul);
+            } else {
+                spotsContainer.innerText = data.selected_spots;
+            }
+            
+            document.getElementById("totalAmount").innerText = "₹" + data.total_price;
+            document.getElementById("bookingDate").innerText = data.booking_date;
+            document.getElementById("receiptDate").innerText = new Date().toLocaleDateString();
+        }
+        
+        function printBill() {
+            window.print();
+        }
+        
+        window.onload = fetchBill;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-text">CityTours</div>
+        </div>
+        
+        <div class="receipt-header">
+            <h2>Tour Package Receipt</h2>
+            <div class="receipt-date">Receipt Generated: <span id="receiptDate"></span></div>
+        </div>
+        
+        <hr>
+        
+        <div class="details">
+            <div class="detail-row">
+                <div class="detail-label">Name:</div>
+                <div class="detail-value" id="customerName"></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Email:</div>
+                <div class="detail-value" id="customerEmail"></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">City:</div>
+                <div class="detail-value" id="tourCity"></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Booking Date:</div>
+                <div class="detail-value" id="bookingDate"></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Attractions:</div>
+                <div class="detail-value" id="spotsVisited"></div>
+            </div>
+        </div>
+        
+        <div class="total-price">
+            <strong>Total Amount: </strong><span id="totalAmount"></span>
+        </div>
+        
+        <button onclick="printBill()">
+            <span class="print-icon">🖨️</span> Print Receipt
+        </button>
+        
+        <div class="footer">
+            <div class="thank-you">Thank you for choosing our tour package!</div>
+            <p>We hope you enjoy your trip. Safe travels!</p>
+            <div class="contact-info">
+                For any queries, please contact us at: support@citytours.com | +1-800-TOUR-123
+            </div>
+        </div>
+    </div>
+</body>
+</html>

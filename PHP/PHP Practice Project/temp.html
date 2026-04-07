@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Feedback</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 50px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        .nav-links a {
+            text-decoration: none;
+            margin: 0 15px;
+            color: #555;
+            font-size: 16px;
+        }
+        .nav-links .active {
+            background: #ff6600;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        .container {
+            padding: 40px;
+        }
+        .feedback-card {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        .feedback-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">&#x1F4CD; Smart City Tourism Guide</div>
+        <div class="nav-links">
+            <a href="#">Explore Cities</a>
+            <a href="#">Travel Packages</a>
+            <a href="#" class="active">Visitor Feedback</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2>Visitor Feedback</h2>
+        <div class="feedback-form">
+            <select id="city-select">
+                <option value="">Select City</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+            </select>
+            <select id="spot-select">
+                <option value="">Select Tourist Spot</option>
+            </select>
+            <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)">
+            <textarea id="feedback" placeholder="Enter your feedback"></textarea>
+            <button onclick="addFeedback()">Add Feedback</button>
+        </div>
+        
+        <h3>All Feedback</h3>
+        <div id="feedback-list"></div>
+    </div>
+    
+    <script>
+        const spots = {
+            Mumbai: ["Gateway of India", "Marine Drive"],
+            Delhi: ["Red Fort", "India Gate"]
+        };
+
+        $("#city-select").change(function() {
+            const city = $(this).val();
+            const spotSelect = $("#spot-select");
+            spotSelect.empty().append('<option value="">Select Tourist Spot</option>');
+            if (city && spots[city]) {
+                spots[city].forEach(spot => {
+                    spotSelect.append(`<option value="${spot}">${spot}</option>`);
+                });
+            }
+        });
+
+        function addFeedback() {
+            const city = $("#city-select").val();
+            const spot = $("#spot-select").val();
+            const rating = $("#rating").val();
+            const feedback = $("#feedback").val();
+            const date = new Date().toLocaleDateString();
+            
+            if (!city || !spot || !rating || !feedback) {
+                alert("Please fill all fields");
+                return;
+            }
+            
+            const feedbackHTML = `
+                <div class='feedback-card'>
+                    <strong>${city} - ${spot}</strong>
+                    <p>⭐ ${rating}</p>
+                    <p>${feedback}</p>
+                    <small>${date}</small>
+                    <button onclick='deleteFeedback(this)'>Delete</button>
+                </div>
+            `;
+            
+            $("#feedback-list").append(feedbackHTML);
+            $("#rating, #feedback").val("");
+        }
+        
+        function deleteFeedback(element) {
+            $(element).parent().remove();
+        }
+    </script>
+</body>
+</html>
