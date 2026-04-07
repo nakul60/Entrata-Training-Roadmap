@@ -58,5 +58,3 @@ Nakul Arora
 ---
 
 Simple, fast, and useful for daily tasks 🚀
-
-## 📂 Project Structure
