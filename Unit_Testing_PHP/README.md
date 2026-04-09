@@ -1,4 +1,4 @@
-# PHP Feature Flag Rules Engine
+# 💻 PHP Feature Flag Rules Engine
 
 A clean, testable PHP application that demonstrates a **feature flag / rollout rules engine** with a simple web interface, unit tests, and a locally generated test coverage report.
 
