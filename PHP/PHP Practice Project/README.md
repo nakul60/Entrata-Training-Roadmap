@@ -68,6 +68,7 @@ Import database using phpMyAdmin
 <br>
 ## Open in browser:
 http://localhost/CityScape
+```
 🔌 Core Modules
 User Authentication
 City Exploration
@@ -80,7 +81,7 @@ AI-based recommendations
 Online payment system
 Admin dashboard
 Real-time tracking
-
+```
 <br>
 
 ## 🤝 Contributing
