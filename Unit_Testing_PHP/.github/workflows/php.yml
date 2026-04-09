@@ -6,8 +6,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Unit_Testing_PHP
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -18,11 +23,11 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Run coverage
+      - name: Run tests with coverage
         run: vendor/bin/phpunit --coverage-html coverage
 
-      - name: Upload coverage
+      - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage
+          path: Unit_Testing_PHP/coverage
