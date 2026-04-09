@@ -34,12 +34,13 @@ QuickStickz is a simple and interactive to-do app built using HTML, CSS, and Jav
 ---
 
 ## 📂 Project Structure
+```
 QuickStickz/
 ┣ index.html
 ┣ style.css
 ┗ script.js
 
-
+```
 ---
 
 ## 💡 Future Improvements
