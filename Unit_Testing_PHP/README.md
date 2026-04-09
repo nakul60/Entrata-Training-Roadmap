@@ -1,6 +1,6 @@
 # 💻 PHP Feature Flag Rules Engine
 
-A clean, testable PHP application that demonstrates a **feature flag / rollout rules engine** with a simple web interface, unit tests, and a locally generated test coverage report.
+A clean, testable PHP application that demonstrates a **feature flag / rollout rules engine** with a simple web interface, unit tests, along with a test coverage report.
 
 This project is designed to showcase **real-world backend logic**, **proper project structure**, and **professional PHP testing practices**.
 
@@ -52,6 +52,7 @@ The `FeatureFlagService` evaluates whether a feature is enabled using a determin
 - No global state
 - Clear separation of concerns
 - Production-ready decision logic
+- used GitHUB Actions for generating test coverage report
 
 ---
 
