@@ -32,6 +32,7 @@ CityScape is a comprehensive web-based tourism platform that helps users explore
 ---
 
 ## 📂 Project Structure
+```
 📦 CityScape
  ┣ 📂 assets
  ┃ ┣ 📂 css
@@ -49,6 +50,8 @@ CityScape is a comprehensive web-based tourism platform that helps users explore
  ┣ 📂 database
  ┃ ┗ 📜 schema.sql
  ┣ 📜 README.md
+```
+
 🚀 Getting Started
 
 ## Prerequisites
