@@ -11,7 +11,7 @@ jobs:
         working-directory: Unit_Testing_PHP
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup PHP
@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Run tests with coverage
+      - name: Run PHPUnit with coverage
         run: vendor/bin/phpunit --coverage-html coverage
 
       - name: Upload coverage report
