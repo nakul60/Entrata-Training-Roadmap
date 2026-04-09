@@ -3,7 +3,7 @@
 [![HTML](https://img.shields.io/badge/Frontend-HTML5-orange.svg)]()  [![CSS](https://img.shields.io/badge/Styling-CSS3-blue.svg)]()  [![JavaScript](https://img.shields.io/badge/Script-JavaScript-yellow.svg)]()  [![PHP](https://img.shields.io/badge/Backend-PHP-purple.svg)]()  [![MySQL](https://img.shields.io/badge/Database-MySQL-blue.svg)]()  [![Deployment](https://img.shields.io/badge/Hosted-Netlify-green.svg)]()
 
 CityScape is a comprehensive web-based tourism platform that helps users explore cities, discover attractions, book travel packages, and share their experiences through an interactive feedback system.
-
+Website: https://smart-city-tourism-guide.netlify.app/
 ---
 
 ## ✨ Key Features
