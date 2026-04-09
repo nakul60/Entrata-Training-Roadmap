@@ -23,6 +23,7 @@ A lightweight frontend is included to interactively test the logic.
 ---
 
 ## 📂 Project Structure
+```
 php-coverage-demo/
 │
 ├── public/                 # Web entry point
@@ -39,7 +40,7 @@ php-coverage-demo/
 ├── composer.json
 ├── composer.lock
 └── phpunit.xml
-
+```
 ---
 
 ## 🧠 Core Logic
