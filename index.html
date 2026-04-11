@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Registration + Tracker App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Smart Registration & Tracker</h1>
+            <p class="subtitle">Register once, track forever</p>
+        </div>
+
+        <!-- Registration Form Section -->
+        <section class="form-section">
+            <h2>Registration Form</h2>
+            <form id="registrationForm" novalidate>
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="e.g., John Doe" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="e.g., john@example.com" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <!-- Phone Field -->
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., +1 (555) 123-4567" required>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Min 8 chars, 1 number, 1 special" required>
+                    <span class="error-message" id="passwordError"></span>
+                    <div class="password-strength">
+                        <div id="strengthBar" class="strength-bar"></div>
+                        <span id="strengthText" class="strength-text">Password strength: </span>
+                    </div>
+                </div>
+
+                <!-- Age Field -->
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" name="age" placeholder="e.g., 25" min="18" max="120" required>
+                    <span class="error-message" id="ageError"></span>
+                </div>
+
+                <!-- Gender Field -->
+                <div class="form-group">
+                    <label for="gender">Gender *</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="error-message" id="genderError"></span>
+                </div>
+
+                <!-- Newsletter Checkbox -->
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Subscribe to newsletter</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="btn btn-primary">Register & Save</button>
+                <button type="button" id="clearBtn" class="btn btn-secondary">Clear Form</button>
+            </form>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <h2>📊 Your Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Registrations</h3>
+                    <p id="totalReg" class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Last Registration</h3>
+                    <p id="lastReg" class="stat-text">Never</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Cookie Status</h3>
+                    <p id="cookieStatus" class="stat-text">Ready</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Processing Time</h3>
+                    <p id="processingTime" class="stat-text">0ms</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration History Section -->
+        <section class="history-section">
+            <div class="history-header">
+                <h2>📋 Registration History</h2>
+                <button id="exportBtn" class="btn btn-small">Export CSV</button>
+                <button id="clearHistoryBtn" class="btn btn-small btn-danger">Clear All</button>
+            </div>
+            <div id="historyContainer" class="history-container">
+                <p class="empty-message">No registrations yet. Fill the form above!</p>
+            </div>
+        </section>
+
+        <!-- Debug Console Section -->
+        <section class="debug-section">
+            <h2>🐛 Debug Console</h2>
+            <div id="debugConsole" class="debug-console">
+                <p class="debug-info">Ready for registration...</p>
+            </div>
+            <button id="clearDebugBtn" class="btn btn-small">Clear Debug Log</button>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
