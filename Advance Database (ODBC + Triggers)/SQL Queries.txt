@@ -1,0 +1,61 @@
+Commands for PostgreSQL via pgAdmin 4:
+
+1) CREATE DATABASE inventory_db;
+2) \c inventory_db
+
+3) CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    price NUMERIC(10,2),
+    stock INT
+);
+
+4) CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    product_id INT REFERENCES products(id),
+    quantity INT,
+    total_price NUMERIC(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+5) CREATE TABLE logs (
+    id SERIAL PRIMARY KEY,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+6) CREATE OR REPLACE FUNCTION calculate_total(p_price NUMERIC, p_qty INT)
+RETURNS NUMERIC AS $$
+BEGIN
+    RETURN p_price * p_qty;
+END;
+$$ LANGUAGE plpgsql;
+
+7) CREATE OR REPLACE FUNCTION check_stock()
+RETURNS TRIGGER AS $$
+DECLARE
+    current_stock INT;
+BEGIN
+    SELECT stock INTO current_stock
+    FROM products
+    WHERE id = NEW.product_id;
+
+    IF current_stock < NEW.quantity THEN
+        RAISE EXCEPTION 'Not enough stock!';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+8) CREATE OR REPLACE FUNCTION calculate_total(p_price NUMERIC, p_qty INT)
+RETURNS NUMERIC AS $$
+BEGIN
+    RETURN p_price * p_qty;
+END;
+$$ LANGUAGE plpgsql;
+
+9) CREATE TRIGGER before_sale
+BEFORE INSERT ON sales
+FOR EACH ROW
+EXECUTE FUNCTION check_stock();
